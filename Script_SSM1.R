@@ -10,12 +10,11 @@ library(adehabitatLT)
 library(sp)
 
 
-#Leer el archivo con los datos
+#Leer el archivo con los datos. Las posiciones están en UTM
 B84481.dat<-read.csv2("84481-Locs2.csv")
 #Elimino observaciones con fechas identicas
 B84481.dat<-B84481.dat[-c(47,159),]
 head(B84481.dat)
-
 
 
 #Ingresar el tiempo en la clase POSIXct
@@ -23,7 +22,7 @@ da <- as.POSIXct(B84481.dat$Date)
 da
 
 #Ahora transformo los datos a un objeto clase ltraj, lo cual
-#inmediatamente calcula estadisticas descritivas necesarias
+#inmediatamente calcula estadisticas descritivas necesarias,
 #como el angulo en radianes y la diferencia de tiempo "dt"
 #entre relocaciones.
 B84481.data <- as.ltraj(xy = B84481.dat[,c("X","Y")], date = da, id = B84481.dat$DeployID)
